@@ -3,23 +3,23 @@
 A small helper that helps you organize your JavaScript code by detecting some sort of ID (e.g. the value of a variable or id of an element).
 
 # Example
-    ```
-    <body id="stuff"></body>
-    <script src="sesame.js"></script>
-    <script>
-    sesame.add("stuff", function(){
-      document.title = "lol";
-    });
-    sesame.add(["stuff"], function(){
-      location.hash = (new Date).getTime();
-    });
+  ```
+  <body id="stuff"></body>
+  <script src="sesame.js"></script>
+  <script>
+  sesame.add("stuff", function(){
+    document.title = "lol";
+  });
+  sesame.add(["stuff"], function(){
+    location.hash = (new Date).getTime();
+  });
 
-    // chaing
-    sesame.after(function(){
-      alert(0);
-    }).run(document.body.id);
-    </script>
-    ```
+  // chaing
+  sesame.after(function(){
+    alert(0);
+  }).run(document.body.id);
+  </script>
+  ```
 
 # Methods
 
