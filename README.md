@@ -72,7 +72,7 @@ I wrote this so I can have some sane structure for my JavaScript code in a Rails
   controller.add("home", function(){
     // stuff
   });
-  controller.run($("body").data("controller"));
+  controller_detector.run($("body").data("controller"));
   ```
 
 # Methods
