@@ -3,7 +3,7 @@
 A small helper that helps you organize your JavaScript code by detecting some sort of ID (e.g. the value of a variable or id of an element).
 
 # Example
-
+    ```
     <body id="stuff"></body>
     <script src="sesame.js"></script>
     <script>
@@ -19,6 +19,7 @@ A small helper that helps you organize your JavaScript code by detecting some so
       alert(0);
     }).run(document.body.id);
     </script>
+    ```
 
 # Methods
 
