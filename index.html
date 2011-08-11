@@ -1,0 +1,15 @@
+<body id="stuff"></body>
+<script src="sesame.js"></script>
+<script>
+sesame.add("stuff", function(){
+  document.title = "lol";
+});
+sesame.add(["stuff"], function(){
+  location.hash = (new Date).getTime();
+});
+
+// chaing
+sesame.after(function(){
+  alert(0);
+}).run(document.body.id);
+</script>
