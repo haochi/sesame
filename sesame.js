@@ -1,52 +1,52 @@
 (function(){
-  function sesame(){
-    this.detections = {};
-    this._after = [];
-    this._before = [];
+  function s(){
+    this.d = {};
+    this.a = [];
+    this.b = [];
   }
-  function looper(a){
-    for(var i=0, l = a.length; i< l; i++){
-      a[i]();
+  function l(a){
+    for(var i=0, l=a.length; i<l;){
+      a[i++]();
     }
   }
 
-  sesame.prototype = {
+  s.prototype = {
     after: function(fn){
-      this._after.push(fn);
+      this.a.push(fn);
       return this;
     },
     before: function(fn){
-      this._before.push(fn);
+      this.b.push(fn);
       return this;
     },
-    add: function(detections, fn){
-      if(detections instanceof Array){
-        for(var i=0, l=detections.length; i<l; i++){
-          this._add(detections[i], fn);
+    add: function(d, fn){
+      if(d instanceof Array){
+        for(var i=0, l=d.length; i<l;){
+          this.c(d[i++], fn);
         }
       }else{
-        this._add(detections, fn);
+        this.c(d, fn);
       }
       return this;
     },
     "new": function(){
-      return new sesame();
+      return new s;
     },
-    run: function(detection){
-      looper(this._before);
-      if(detection != null && detection in this.detections){
-        looper(this.detections[detection]);
+    run: function(d){
+      l(this.b);
+      if(d != null && d in this.d){
+        l(this.d[d]);
       }
-      looper(this._after);
+      l(this.a);
       return this;
     },
-    _add: function(detection, fn){
-      if(!(detection in this.detections)){
-        this.detections[detection] = [];
+    c: function(d, fn){
+      if(!(d in this.d)){
+        this.d[d] = [];
       }
-      this.detections[detection].push(fn);
+      this.d[d].push(fn);
     }
   };
 
-  window.sesame = new sesame();
+  window.sesame = new s;
 })();
