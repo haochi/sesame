@@ -28,15 +28,11 @@
     run: function(detection){
       var noop = function(){};
       (this.before || noop)();
-      if(detection != null){
-        if(detection in this.detections){
-          var detections = this.detections[detection];
-          for(var i=0, l=detections.length; i<l; i++){
-            detections[i]();
-          }
+      if(detection != null && detection in this.detections){
+        var detections = this.detections[detection];
+        for(var i=0, l=detections.length; i<l; i++){
+          detections[i]();
         }
-      }else{
-        throw "Nothing to detect.";
       }
       (this.after || noop)();
       return this;

@@ -1,15 +1,107 @@
-<body id="stuff"></body>
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css"/>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
 <script src="sesame.js"></script>
 <script>
-sesame.add("stuff", function(){
-  document.title = "lol";
-});
-sesame.add(["stuff"], function(){
-  location.hash = (new Date).getTime();
-});
+$(document).ready(function(){
+  test("Before & After", function(){
+    var s = sesame.new();
+    expect(2);
+    s.after(function(){
+      ok(true);
+    });
+    s.before(function(){
+      ok(true);
+    });
+    s.run();
+  });
 
-// chaing
-sesame.after(function(){
-  alert(0);
-}).run(document.body.id);
+  test("Simple Add", function(){
+    var s = sesame.new();
+    expect(2);
+    s.add("test", function(){
+      ok(true);
+    });
+    s.add(["test", "test2"], function(){
+      ok(true);
+    });
+    s.run("test");
+  });
+
+  test("Chaining", function(){
+    var s = sesame.new();
+    expect(2);
+    s.add("test", function(){
+      ok(true);
+    }).add(["test", "test2"], function(){
+      ok(true);
+    }).run("test");
+  });
+
+  test("Full chaining", function(){
+    sesame
+      .new()
+      .before(function(){ ok(true); })
+      .after(function(){ ok(true); })
+      .add("test", function(){ ok(true); })
+      .add(["test"], function(){ ok(true); })
+      .run("test");
+    expect(4);
+  });
+
+  test("Execute matching ones", function(){
+    var s = sesame.new();
+    s.after(function(){
+      ok(true);
+    });
+    s.add("test", function(){
+      ok(true);
+    });
+    s.add(["test2"], function(){
+      ok(true);
+    });
+    s.run("test");
+    expect(2);
+  });
+
+  test("Multiple same values", function(){
+    var s = sesame.new();
+    s.after(function(){
+      ok(true);
+    });
+    s.add("test", function(){
+      ok(true);
+    });
+    s.add(["test", "test"], function(){
+      ok(true);
+    });
+    s.run("test");
+    expect(4);
+  });
+
+  test("Run more than once", function(){
+    var s = sesame.new();
+    s.add("test", function(){
+      ok(true);
+    });
+    s.run("test");
+    s.run("test");
+    s.run("test");
+    expect(3);
+  });
+});
 </script>
+
+</head>
+<body>
+  <h1 id="qunit-header">Sesame Test</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>
