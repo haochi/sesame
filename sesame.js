@@ -1,11 +1,22 @@
 (function(){
   function sesame(){
     this.detections = {};
+    this._after = [];
+    this._before = [];
+  }
+  function looper(a){
+    for(var i=0, l = a.length; i< l; i++){
+      a[i]();
+    }
   }
 
   sesame.prototype = {
+    after: function(fn){
+      this._after.push(fn);
+      return this;
+    },
     before: function(fn){
-      this.before = fn;
+      this._before.push(fn);
       return this;
     },
     add: function(detections, fn){
@@ -18,23 +29,15 @@
       }
       return this;
     },
-    after: function(fn){
-      this.after = fn;
-      return this;
-    },
     "new": function(){
       return new sesame();
     },
     run: function(detection){
-      var noop = function(){};
-      (this.before || noop)();
+      looper(this._before);
       if(detection != null && detection in this.detections){
-        var detections = this.detections[detection];
-        for(var i=0, l=detections.length; i<l; i++){
-          detections[i]();
-        }
+        looper(this.detections[detection]);
       }
-      (this.after || noop)();
+      looper(this._after);
       return this;
     },
     _add: function(detection, fn){
