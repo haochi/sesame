@@ -8,7 +8,7 @@
 <script>
 $(document).ready(function(){
   test("Before & After", function(){
-    var s = sesame.new();
+    var s = sesame.create();
     expect(2);
     s.after(function(){
       ok(true);
@@ -20,7 +20,7 @@ $(document).ready(function(){
   });
 
   test("Simple Add", function(){
-    var s = sesame.new();
+    var s = sesame.create();
     expect(2);
     s.add("test", function(){
       ok(true);
@@ -32,7 +32,7 @@ $(document).ready(function(){
   });
 
   test("Chaining", function(){
-    var s = sesame.new();
+    var s = sesame.create();
     expect(2);
     s.add("test", function(){
       ok(true);
@@ -43,7 +43,7 @@ $(document).ready(function(){
 
   test("Full chaining", function(){
     sesame
-      .new()
+      .create()
       .before(function(){ ok(true); })
       .after(function(){ ok(true); })
       .add("test", function(){ ok(true); })
@@ -53,7 +53,7 @@ $(document).ready(function(){
   });
 
   test("Execute matching ones", function(){
-    var s = sesame.new();
+    var s = sesame.create();
     s.after(function(){
       ok(true);
     });
@@ -68,7 +68,7 @@ $(document).ready(function(){
   });
 
   test("Multiple same values", function(){
-    var s = sesame.new();
+    var s = sesame.create();
     s.after(function(){
       ok(true);
     });
@@ -83,7 +83,7 @@ $(document).ready(function(){
   });
 
   test("Run more than once", function(){
-    var s = sesame.new();
+    var s = sesame.create();
     s.add("test", function(){
       ok(true);
     });

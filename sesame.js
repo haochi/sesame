@@ -29,13 +29,14 @@
       }
       return this;
     },
-    "new": function(){
+    create: function(){
       return new s;
     },
     run: function(d){
+      var e = this.d;
       l(this.b);
-      if(d != null && d in this.d){
-        l(this.d[d]);
+      if(d != null && d in e){
+        l(e[d]);
       }
       l(this.a);
       return this;
