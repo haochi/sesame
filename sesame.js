@@ -1,9 +1,9 @@
 (function(){
   function s(){
-    d = this.d = {};
+    this.d = {};
     this.a = [];
     this.b = [];
-    e = this.e = {};
+    this.e = {};
   }
   function run(a){
     for(var i=0, l=a.length; i<l;){
