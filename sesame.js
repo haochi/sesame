@@ -1,12 +1,33 @@
+// ==ClosureCompiler==
+// @compilation_level SIMPLE_OPTIMIZATIONS
+// @output_file_name default.js
+// ==/ClosureCompiler==
+
 (function(){
   function s(){
-    this.d = {};
+    d = this.d = {};
     this.a = [];
     this.b = [];
+    e = this.e = {};
   }
-  function l(a){
+  function run(a){
     for(var i=0, l=a.length; i<l;){
       a[i++]();
+    }
+  }
+  function push(dict, d, fn){
+    if(!(d in dict)){
+      dict[d] = [];
+    }
+    dict[d].push(fn);
+  }
+  function add(dict, d, fn){
+    if(d instanceof Array){
+      for(var i=0, l=d.length; i<l;){
+        push(dict, d[i++], fn);
+      }
+    }else{
+      push(dict, d, fn);
     }
   }
 
@@ -20,32 +41,32 @@
       return this;
     },
     add: function(d, fn){
-      if(d instanceof Array){
-        for(var i=0, l=d.length; i<l;){
-          this.c(d[i++], fn);
-        }
-      }else{
-        this.c(d, fn);
-      }
+      add(this.d, d, fn);
+      return this;
+    },
+    except: function(d, fn){
+      add(this.e, d, fn);
       return this;
     },
     create: function(){
       return new s;
     },
-    run: function(d){
-      var e = this.d;
-      l(this.b);
-      if(d != null && d in e){
-        l(e[d]);
+    run: function(rule){
+      var d = this.d
+        , e = this.e;
+      run(this.b);
+      if(d != null){
+        if(rule in d){
+          run(d[rule]);
+        }
+        for(var i in e){
+          if(i != rule){
+            run(e[i]);
+          }
+        }
       }
-      l(this.a);
+      run(this.a);
       return this;
-    },
-    c: function(d, fn){
-      if(!(d in this.d)){
-        this.d[d] = [];
-      }
-      this.d[d].push(fn);
     }
   };
 
