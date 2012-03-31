@@ -1,8 +1,3 @@
-// ==ClosureCompiler==
-// @compilation_level SIMPLE_OPTIMIZATIONS
-// @output_file_name default.js
-// ==/ClosureCompiler==
-
 (function(){
   function s(){
     d = this.d = {};
