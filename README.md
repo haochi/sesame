@@ -34,6 +34,10 @@ I wrote this so I can have some sane structure for my JavaScript code in a Rails
       $(this).slideDown();
     });
   });
+
+  sesame.except("admin#login", function(){
+    // track every mouse movement and keystroke
+  });
   
   sesame.after(function(){
     $("#obnoxious_music").play();
@@ -52,6 +56,7 @@ I wrote this so I can have some sane structure for my JavaScript code in a Rails
 # Methods
 
 * `add(detections, function)`: `detections` can be a string or an array of strings, which will be detected by the `run` method
+* `except(detections, function)`: The opposite of `add`. Executes in all cases except (hence the name) when `detections` matches.
 * `before(function)`: this gets executed every time before all other functions that sesame handles get executed
 * `after(function)`: similar to `before`, but after everything else is executed
 * `run(detection)`: `detection` is expected to be a string of whatever you want to detect. this will trigger all the matching functions sesame handles to execute.
